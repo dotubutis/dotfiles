@@ -113,12 +113,14 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias zshconfig="nvim ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias nvimconfig="nvim /Users/personal/.config/nvim/init.lua"
+alias tmuxconfig="nvim ~/.tmux.conf"
 alias ls="lsd --blocks size --blocks name"
 alias cat="bat"
-alias brew="~/brew.sh"
 alias vim="nvim"
+alias lg="lazygit"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
