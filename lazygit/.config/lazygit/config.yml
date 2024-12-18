@@ -1,5 +1,5 @@
-# os:
-#   editPreset: 'nvim-remote'
+os:
+  editPreset: 'nvim-remote'
 gui:
   showRandomTip: true
 # What to do when opening Lazygit outside of a git repo.
