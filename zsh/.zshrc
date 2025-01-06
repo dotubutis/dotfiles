@@ -90,6 +90,9 @@ znap source marlonrichert/zsh-autocomplete
 
 source $ZSH/oh-my-zsh.sh
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -117,10 +120,13 @@ alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias zshconfig="nvim ~/.zshrc"
 alias nvimconfig="nvim /Users/personal/.config/nvim/init.lua"
 alias tmuxconfig="nvim ~/.tmux.conf"
+alias wezconfig="nvim ~/.wezterm.lua"
 alias ls="lsd --blocks size --blocks name"
 alias cat="bat"
 alias vim="nvim"
 alias lg="lazygit"
+alias fzfvim='nvim $(fzf -m --preview="bat --color=always {}")'
+alias eject='~/workspace/scripts/eject_and_check.sh'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
