@@ -1251,6 +1251,7 @@ require('lazy').setup({
         cmd = 'lazygit',
         hidden = true,
         direction = 'float',
+        go_back = 0,
         float_opts = {
           border = 'none',
           width = 100000,
@@ -1262,7 +1263,17 @@ require('lazy').setup({
         lazygit:toggle()
       end
 
+      function Lazygit_focus()
+        lazygit:focus()
+      end
+
+      function Lazygit_close()
+        lazygit:close()
+      end
+
       vim.api.nvim_set_keymap('n', '<leader>lg', '<cmd>lua Lazygit_toggle()<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>lG', '<cmd>lua Lazygit_focus()<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>lc', '<cmd>lua Lazygit_close()<CR>', { noremap = true, silent = true })
     end,
   },
   {
