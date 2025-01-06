@@ -1298,6 +1298,13 @@ require('lazy').setup({
         desc = 'Quickfix List (Trouble)',
       },
     },
+    {
+      'rmagatti/auto-session',
+      lazy = false,
+      opts = {
+        suppressed_dirs = { '~/', '~/Downloads', '/' },
+      },
+    },
   },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
