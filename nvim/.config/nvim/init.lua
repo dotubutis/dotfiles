@@ -169,6 +169,8 @@ end, {})
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+vim.keymap.set('n', '<leader>cp', ':CopyRelPath<CR>', { noremap = true, desc = 'Copy relative path to clipboard' })
+vim.keymap.set('n', '<leader>cP', ':CopyPath<CR>', { noremap = true, desc = 'Copy absolute path to clipboard' })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
