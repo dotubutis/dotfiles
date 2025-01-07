@@ -1140,9 +1140,9 @@ require('lazy').setup({
           },
         },
       }
-      -- vim.keymap.set('n', '<C-b>', '<Cmd>Neotree reveal float<CR>')
+      vim.keymap.set('n', '<leader>nf', '<Cmd>Neotree reveal float<CR>', { noremap = true, desc = 'Neotree reveal float' })
+      vim.keymap.set('n', '<leader>nl', '<Cmd>Neotree reveal left<CR>', { noremap = true, desc = 'Neotree reveal left' })
       vim.keymap.set('n', '<A-n>', '<Cmd>Neotree toggle<CR>')
-      vim.keymap.set('n', '<A-N>', '<Cmd>Neotree reveal<CR>')
     end,
   },
   {
