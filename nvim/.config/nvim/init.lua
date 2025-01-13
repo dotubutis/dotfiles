@@ -1321,6 +1321,18 @@ require('lazy').setup({
     },
   },
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
+  {
+    'sindrets/diffview.nvim',
+    lazy = false,
+
+    vim.keymap.set('n', '<A-m>', function()
+      if next(require('diffview.lib').views) == nil then
+        vim.cmd 'DiffviewOpen'
+      else
+        vim.cmd 'DiffviewClose'
+      end
+    end, { desc = 'Diffview' }),
+  },
   -- END OF PLUGINS
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
