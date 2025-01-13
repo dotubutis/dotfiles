@@ -459,6 +459,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sb', builtin.git_branches, { desc = '[S]earch Git Branches' })
       vim.keymap.set('n', '<leader>st', builtin.git_status, { desc = '[S]earch Git Status' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<A-b>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Resume the last search
       vim.keymap.set('n', '<leader>sx', require('telescope.builtin').resume, {
