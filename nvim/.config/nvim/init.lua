@@ -1279,17 +1279,17 @@ require('lazy').setup({
   },
   {
     'folke/trouble.nvim',
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
-    cmd = 'Trouble',
+    opts = { focus = true },
+    cmd = { 'Trouble' },
     keys = {
       {
         '<leader>xx',
-        '<cmd>Trouble diagnostics toggle<cr>',
+        '<cmd>Trouble diagnostics toggle win={size=20}<cr>',
         desc = 'Diagnostics (Trouble)',
       },
       {
         '<leader>xX',
-        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+        '<cmd>Trouble diagnostics toggle filter.buf=0 win={size=20}<cr>',
         desc = 'Buffer Diagnostics (Trouble)',
       },
       {
@@ -1313,12 +1313,12 @@ require('lazy').setup({
         desc = 'Quickfix List (Trouble)',
       },
     },
-    {
-      'rmagatti/auto-session',
-      lazy = false,
-      opts = {
-        suppressed_dirs = { '~/', '~/Downloads', '/' },
-      },
+  },
+  {
+    'rmagatti/auto-session',
+    lazy = false,
+    opts = {
+      suppressed_dirs = { '~/', '~/Downloads', '/' },
     },
   },
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
