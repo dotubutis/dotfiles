@@ -448,7 +448,8 @@ require('lazy').setup({
       -- vim.keymap.set('i', '<C-d>', actions.delete_buffer, { buffer = true, desc = 'Delete buffer' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sF', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sp', builtin.git_files, { desc = '[S]earch [P]roject Git Files' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       -- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -460,13 +461,30 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>st', builtin.git_status, { desc = '[S]earch Git Status' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<A-b>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-
       -- Resume the last search
       vim.keymap.set('n', '<leader>sx', require('telescope.builtin').resume, {
         noremap = true,
         silent = true,
         desc = 'Resume',
       })
+
+      local is_inside_work_tree = {}
+      local function project_files()
+        local opts = {}
+
+        local cwd = vim.fn.getcwd()
+        if is_inside_work_tree[cwd] == nil then
+          vim.fn.system 'git rev-parse --is-inside-work-tree'
+          is_inside_work_tree[cwd] = vim.v.shell_error == 0
+        end
+
+        if is_inside_work_tree[cwd] then
+          require('telescope.builtin').git_files(opts)
+        else
+          require('telescope.builtin').find_files(opts)
+        end
+      end
+      vim.keymap.set('n', '<leader>sf', project_files, { noremap = true, silent = true, desc = '[S]earch [F]iles in project' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
