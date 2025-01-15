@@ -1339,7 +1339,10 @@ require('lazy').setup({
       suppressed_dirs = { '~/', '~/Downloads', '/' },
     },
   },
-  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
+  { 'ellisonleao/gruvbox.nvim', lazy = false, priority = 1000, config = true },
+  { 'EdenEast/nightfox.nvim', lazy = false, priority = 1000, configure = true },
+  { 'dasupradyumna/midnight.nvim', lazy = false, priority = 1000 },
+  { 'projekt0n/github-nvim-theme', name = 'github-theme' },
   {
     'sindrets/diffview.nvim',
     lazy = false,
