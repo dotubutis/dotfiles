@@ -216,13 +216,13 @@ vim.api.nvim_set_keymap(
   'n',
   '<leader>gh',
   ':lua require("github_keymap").open_file_on_github()<CR>',
-  { noremap = true, silent = true, desc = 'Open current file on GitHub' }
+  { noremap = true, silent = true, desc = 'Open file on GitHub (current branch)' }
 )
 vim.api.nvim_set_keymap(
   'n',
   '<leader>gH',
   ':lua require("github_keymap").open_file_on_github("default")<CR>',
-  { noremap = true, silent = true, desc = 'Open current file on GitHub (default branch)' }
+  { noremap = true, silent = true, desc = 'Open file on GitHub (default branch)' }
 )
 
 -- [[ Basic Autocommands ]]
