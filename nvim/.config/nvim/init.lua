@@ -1369,6 +1369,29 @@ require('lazy').setup({
         vim.cmd 'DiffviewClose'
       end
     end, { desc = 'Diffview' }),
+
+    vim.keymap.set('n', '<leader>gf', function()
+      vim.cmd 'DiffviewFileHistory %'
+    end, { desc = 'Diffview: current file history' }),
+
+    vim.keymap.set('n', '<leader>gF', function()
+      vim.cmd 'DiffviewFileHistory'
+    end, { desc = 'Diffview: current branch (file) history' }),
+
+    vim.keymap.set('n', '<leader>gd', function()
+      local default_branch = 'main' -- Default assumption
+
+      -- Check if 'origin/main' exists
+      vim.fn.systemlist 'git rev-parse --verify origin/main 2>/dev/null'
+      if vim.v.shell_error ~= 0 then
+        -- If 'origin/main' does not exist, assume 'origin/master'
+        default_branch = 'master'
+      end
+
+      local current_branch = vim.fn.systemlist('git rev-parse --abbrev-ref HEAD')[1]
+
+      vim.cmd('DiffviewOpen origin/' .. default_branch .. '...' .. current_branch)
+    end, { desc = 'Diffview: compare main branch to current branch' }),
   },
   -- END OF PLUGINS
 
