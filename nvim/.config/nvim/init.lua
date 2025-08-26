@@ -167,10 +167,20 @@ vim.api.nvim_create_user_command('CopyRelPath', function()
   vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
 
+-- Add: Copy relative path with current line number
+vim.api.nvim_create_user_command('CopyRelPathWithLine', function()
+  local path = vim.fn.expand '%'
+  local line = vim.fn.line '.'
+  local text = path .. ':' .. line
+  vim.fn.setreg('+', text)
+  vim.notify('Copied "' .. text .. '" to the clipboard!')
+end, {})
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 vim.keymap.set('n', '<leader>cp', ':CopyRelPath<CR>', { noremap = true, desc = 'Copy relative path to clipboard' })
 vim.keymap.set('n', '<leader>cP', ':CopyPath<CR>', { noremap = true, desc = 'Copy absolute path to clipboard' })
+vim.keymap.set('n', '<leader>cL', ':CopyRelPathWithLine<CR>', { noremap = true, desc = 'Copy relative path with line to clipboard' })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
