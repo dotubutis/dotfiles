@@ -433,7 +433,7 @@ require('lazy').setup({
         -- pickers = {}
         pickers = {
           find_files = {
-            find_command = { 'rg', '--files', '--sortr=modified', '--hidden' },
+            find_command = { 'rg', '--files', '--sort=modified', '--hidden', '--no-ignore-vcs' },
           },
         },
         extensions = {
