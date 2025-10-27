@@ -326,7 +326,7 @@ require('lazy').setup({
           end
         end, { desc = 'Previous Git Hunk' })
 
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = 'Toggle Git Blame' })
       end,
     },
   },
