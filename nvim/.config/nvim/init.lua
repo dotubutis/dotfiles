@@ -224,13 +224,13 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 local github_keymap = require 'github_keymap'
 vim.api.nvim_set_keymap(
   'n',
-  '<leader>gh',
+  '<leader>go',
   ':lua require("github_keymap").open_file_on_github()<CR>',
   { noremap = true, silent = true, desc = 'Open file on GitHub (current branch)' }
 )
 vim.api.nvim_set_keymap(
   'n',
-  '<leader>gH',
+  '<leader>gO',
   ':lua require("github_keymap").open_file_on_github("default")<CR>',
   { noremap = true, silent = true, desc = 'Open file on GitHub (default branch)' }
 )
@@ -1052,8 +1052,8 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      -- vim.cmd.colorscheme 'tokyonight-moon'
-      vim.cmd.colorscheme 'gruvbox'
+      vim.cmd.colorscheme 'tokyonight-moon'
+      -- vim.cmd.colorscheme 'gruvbox'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -1198,29 +1198,29 @@ require('lazy').setup({
   },
   -- { 'tpope/vim-fugitive' },
   -- { 'tpope/vim-rails' },
-  {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    config = function()
-      require('copilot').setup {
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 75,
-          keymap = {
-            -- accept = '<M-l>',
-            accept = '<M-Tab>',
-            accept_word = '<M-Right>',
-            accept_line = false,
-            next = '<M-]>',
-            prev = '<M-[>',
-            dismiss = '<M-\\>',
-          },
-        },
-      }
-    end,
-  },
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   cmd = 'Copilot',
+  --   event = 'InsertEnter',
+  --   config = function()
+  --     require('copilot').setup {
+  --       suggestion = {
+  --         enabled = true,
+  --         auto_trigger = true,
+  --         debounce = 75,
+  --         keymap = {
+  --           -- accept = '<M-l>',
+  --           accept = '<M-Tab>',
+  --           accept_word = '<M-Right>',
+  --           accept_line = false,
+  --           next = '<M-]>',
+  --           prev = '<M-[>',
+  --           dismiss = '<M-\\>',
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
 
   -- Testing
   {
@@ -1423,6 +1423,7 @@ require('lazy').setup({
       { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
     },
   },
+  { 'kevinhwang91/nvim-ufo' },
   -- END OF PLUGINS
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
