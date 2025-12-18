@@ -26,6 +26,24 @@ dotfiles/
 └── yazi/          → ~/.config/yazi/
 ```
 
+## Adding a New Config
+
+Example: adding yazi (config goes in `~/.config/yazi/`)
+
+```bash
+# 1. Create the folder structure
+mkdir -p ~/dotfiles/yazi/.config/yazi
+
+# 2. Create your config file
+nvim ~/dotfiles/yazi/.config/yazi/yazi.toml
+
+# 3. Stow it
+cd ~/dotfiles && stow yazi
+
+# 4. Commit
+git add yazi && git commit -m "Add yazi config"
+```
+
 ## Usage
 
 ```bash
