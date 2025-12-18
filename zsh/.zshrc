@@ -88,6 +88,9 @@ source ~/.oh-my-zsh/custom/plugins/znap/znap.zsh  # Start Znap
 # Znap managed plugins
 znap source marlonrichert/zsh-autocomplete
 
+# friendly vi(vim) mode plugin for ZSH.
+# source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 source $ZSH/oh-my-zsh.sh
 
 # Set up fzf key bindings and fuzzy completion
