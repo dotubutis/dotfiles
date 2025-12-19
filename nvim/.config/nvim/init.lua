@@ -886,11 +886,13 @@ require('lazy').setup({
         javascript = { 'eslint' },
         typescript = { 'eslint' },
         -- ruby = { 'rubocop' },
+        -- ruby = { 'bundle_rubocop' },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
 
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+      -- vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+      vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
         group = lint_augroup,
         callback = function()
           lint.try_lint()
@@ -900,6 +902,85 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ll', function()
         lint.try_lint()
       end, { desc = 'Trigger linting for current file' })
+
+      vim.keymap.set('n', '<leader>lp', function()
+        print(lint_progress())
+      end, { desc = 'Show lint progress' })
+
+      local lint_progress = function()
+        local linters = require('lint').get_running()
+        if #linters == 0 then
+          return '󰦕'
+        end
+        return '󱉶 ' .. table.concat(linters, ', ')
+      end
+
+      -- RUBOCOP ATTEMPT 2 --
+      -- lint.linters.rubocop.cmd = 'bundle exec rubocop'
+      -- lint.linters.rubocop.args = {
+      --   '--format',
+      --   'json',
+      --   '--force-exclusion',
+      --   '--stdin',
+      --   function()
+      --     return vim.fn.expand '%'
+      --   end,
+      -- }
+      -- RUBOCOP ATTEMPT 2 --
+
+      -- RUBOCOP ATTEMPT 1 --
+      -- local severity_map = {
+      --   ['fatal'] = vim.diagnostic.severity.ERROR,
+      --   ['error'] = vim.diagnostic.severity.ERROR,
+      --   ['warning'] = vim.diagnostic.severity.WARN,
+      --   ['convention'] = vim.diagnostic.severity.HINT,
+      --   ['refactor'] = vim.diagnostic.severity.INFO,
+      --   ['info'] = vim.diagnostic.severity.INFO,
+      -- }
+      --
+      -- local rubocop = {
+      --   cmd = 'bundle exec rubocop',
+      --   stdin = true,
+      --   args = {
+      --     '--format',
+      --     'json',
+      --     '--force-exclusion',
+      --     '--server',
+      --     '--stdin',
+      --     function()
+      --       return vim.api.nvim_buf_get_name(0)
+      --     end,
+      --   },
+      --   ignore_exitcode = true,
+      --   parser = function(output)
+      --     local diagnostics = {}
+      --     local decoded = vim.json.decode(output)
+      --
+      --     if not decoded.files[1] then
+      --       return diagnostics
+      --     end
+      --
+      --     local offences = decoded.files[1].offenses
+      --
+      --     for _, off in pairs(offences) do
+      --       table.insert(diagnostics, {
+      --         source = 'rubocop',
+      --         lnum = off.location.start_line - 1,
+      --         col = off.location.start_column - 1,
+      --         end_lnum = off.location.last_line - 1,
+      --         end_col = off.location.last_column,
+      --         severity = severity_map[off.severity],
+      --         message = off.message,
+      --         code = off.cop_name,
+      --       })
+      --     end
+      --
+      --     return diagnostics
+      --   end,
+      -- }
+      --
+      -- lint.linters.bundle_rubocop = rubocop
+      -- RUBOCOP ATTEMPT 1 END --
     end,
   },
   {
