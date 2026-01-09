@@ -1,0 +1,14 @@
+[[mgr.prepend_keymap]]
+on   = [ "g", "f" ]
+run  = "shell 'open -R \"$0\"' --confirm"
+desc = "Reveal in Finder"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "k", "k" ]
+run  = "cd /Volumes/t7_shield/kuryba"
+desc = "uryba"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "k", "l" ]
+run  = "cd /Volumes/t7_shield/kuryba/ableton/User Library"
+desc = "Ableton User Library"
