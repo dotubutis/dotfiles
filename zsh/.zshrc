@@ -153,3 +153,9 @@ function y() {
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+
+# unquarantine: Remove macOS quarantine attributes from a file or app
+# Usage example: unquarantine /Applications/Sabaki.app
+function unquarantine() {
+	xattr -cr "$@"
+}
