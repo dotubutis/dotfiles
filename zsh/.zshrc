@@ -159,3 +159,51 @@ function y() {
 function unquarantine() {
 	xattr -cr "$@"
 }
+
+# Open a git branch as a worktree in Cursor
+cwt() {
+  local branch="$1"
+  local repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+
+  if [[ -z "$repo_root" ]]; then
+    echo "Not inside a git repository"
+    return 1
+  fi
+
+  local repo_name=$(basename "$repo_root")
+  local worktree_dir="${repo_root}/../${repo_name}-worktrees/${branch//\//-}"
+
+  # Fetch latest so remote branches are available
+  git fetch --all --quiet
+
+  # Create the worktree (works for both local and remote branches)
+  if ! git worktree add "$worktree_dir" "$branch" 2>/dev/null; then
+    # If branch doesn't exist locally, try tracking the remote
+    git worktree add "$worktree_dir" --track -b "$branch" "origin/$branch" || return 1
+  fi
+
+  echo "Worktree created at: $worktree_dir"
+  cursor "$worktree_dir"
+}
+
+# Remove a worktree
+cwt-rm() {
+  local branch="$1"
+  local repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+  local repo_name=$(basename "$repo_root")
+  local worktree_dir="${repo_root}/../${repo_name}-worktrees/${branch//\//-}"
+
+  git worktree remove "$worktree_dir" && echo "Removed worktree for $branch"
+}
+
+# Remove all worktrees
+cwt-clean() {
+  git worktree prune
+  local repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+  local repo_name=$(basename "$repo_root")
+  local worktree_base="${repo_root}/../${repo_name}-worktrees"
+  
+  if [[ -d "$worktree_base" ]]; then
+    rm -rf "$worktree_base" && echo "Cleaned all worktrees"
+  fi
+}
