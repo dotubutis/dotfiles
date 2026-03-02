@@ -145,6 +145,9 @@ export NVM_DIR="$HOME/.nvm"
 # backblaze
 export RCLONE_FAST_LIST=true
 
+# for cursor agent
+export PATH="$HOME/.local/bin:$PATH"
+
 # shell wrapper for yazi https://yazi-rs.github.io/docs/quick-start
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -207,3 +210,8 @@ cwt-clean() {
     rm -rf "$worktree_base" && echo "Cleaned all worktrees"
   fi
 }
+
+# Load private zsh configuration
+if [[ -f "$HOME/.zshrc.private" ]]; then
+  source "$HOME/.zshrc.private"
+fi
