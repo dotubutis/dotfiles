@@ -121,7 +121,7 @@ source <(fzf --zsh)
 # Example aliases
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias zshconfig="nvim ~/.zshrc"
-alias nvimconfig="nvim /Users/personal/.config/nvim/init.lua"
+alias nvimconfig="nvim ~/.config/nvim/init.lua"
 alias tmuxconfig="nvim ~/.tmux.conf"
 alias wezconfig="nvim ~/.wezterm.lua"
 alias ls="lsd --blocks size --blocks name"
