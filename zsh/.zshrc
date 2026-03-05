@@ -164,6 +164,8 @@ function unquarantine() {
 }
 
 # Open a git branch as a worktree in Cursor
+# NOTE: If .cursor/ is ever committed to the repo, the worktree will already
+# have it from checkout and the symlink will be skipped (! -e guard).
 cwt() {
   local branch="$1"
   local repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
@@ -175,6 +177,8 @@ cwt() {
 
   local repo_name=$(basename "$repo_root")
   local worktree_dir="${repo_root}/../${repo_name}-worktrees/${branch//\//-}"
+  # Resolve the main worktree so the symlink is correct even when run from a worktree
+  local main_worktree=$(git worktree list --porcelain | head -1 | sed 's/worktree //')
 
   # Fetch latest so remote branches are available
   git fetch --all --quiet
@@ -183,6 +187,11 @@ cwt() {
   if ! git worktree add "$worktree_dir" "$branch" 2>/dev/null; then
     # If branch doesn't exist locally, try tracking the remote
     git worktree add "$worktree_dir" --track -b "$branch" "origin/$branch" || return 1
+  fi
+
+  if [[ -d "${main_worktree}/.cursor" && ! -e "${worktree_dir}/.cursor" ]]; then
+    ln -s "${main_worktree}/.cursor" "${worktree_dir}/.cursor"
+    echo "Symlinked .cursor/ from main worktree"
   fi
 
   echo "Worktree created at: $worktree_dir"
