@@ -121,6 +121,7 @@ source <(fzf --zsh)
 # Example aliases
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias zshconfig="nvim ~/.zshrc"
+alias zshconfigpriv="nvim ~/.zshrc.private"
 alias nvimconfig="nvim ~/.config/nvim/init.lua"
 alias tmuxconfig="nvim ~/.tmux.conf"
 alias wezconfig="nvim ~/.wezterm.lua"
@@ -161,6 +162,31 @@ function y() {
 # Usage example: unquarantine /Applications/Sabaki.app
 function unquarantine() {
 	xattr -cr "$@"
+}
+
+function ableton-logs() {
+  local ableton_prefs="$HOME/Library/Preferences/Ableton"
+  local live_dir log_file
+  local -a live_dirs
+
+  live_dirs=("$ableton_prefs"/Live\ *(/N))
+
+  if (( ${#live_dirs} == 0 )); then
+    echo "No Ableton Live directory found in $ableton_prefs"
+    return 1
+  fi
+
+  live_dir=$(printf '%s\n' "${live_dirs[@]}" | sort -V | tail -1)
+
+  log_file="${live_dir}/Log.txt"
+
+  if [[ ! -f "$log_file" ]]; then
+    echo "Log file not found: $log_file"
+    return 1
+  fi
+
+  echo "Tailing: $log_file"
+  tail -f "$log_file"
 }
 
 # Open a git branch as a worktree in Cursor
@@ -224,3 +250,17 @@ cwt-clean() {
 if [[ -f "$HOME/.zshrc.private" ]]; then
   source "$HOME/.zshrc.private"
 fi
+
+ghnew() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: ghnew <repo-name>" >&2
+    return 1
+  fi
+  gh repo create "$1" --private --source=. --push
+}
+source ${HOME}/.ghcup/env
+
+# Dotnet
+export DOTNET_ROOT="/opt/homebrew/opt/dotnet@8/libexec"
+export PATH="/opt/homebrew/opt/dotnet@8/bin:$PATH"
+
