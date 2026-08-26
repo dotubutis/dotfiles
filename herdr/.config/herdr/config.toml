@@ -1,0 +1,26 @@
+onboarding = false
+[keys]
+prefix = "ctrl+space"
+split_vertical = ["prefix+v", "prefix+%"]
+split_horizontal = ["prefix+minus", "prefix+\""]
+
+[terminal]
+new_cwd = "follow"
+
+[[keys.command]]
+key = "prefix+|"
+type = "pane"
+command = "claude --continue --fork-session"
+description = "fork Claude Code session into new pane"
+
+[[keys.command]]
+key = "prefix+t"
+type = "shell"
+command = "~/.config/herdr/scripts/branch-session.sh tab"
+description = "branch this Claude session into a new tab"
+
+[[keys.command]]
+key = "prefix+f"
+type = "shell"
+command = "~/.config/herdr/scripts/branch-session.sh pane"
+description = "branch this Claude session into a new split pane (fork)"

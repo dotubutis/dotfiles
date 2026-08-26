@@ -23,6 +23,7 @@ dotfiles/
 ├── nvim/          → ~/.config/nvim/
 ├── lazygit/       → ~/.config/lazygit/
 ├── nvim-vscode/   → ~/.config/nvim-vscode/
+├── herdr/         → ~/.config/herdr/config.toml, ~/.config/herdr/scripts/
 └── yazi/          → ~/.config/yazi/
 ```
 
