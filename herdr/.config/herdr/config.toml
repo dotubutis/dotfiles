@@ -17,10 +17,10 @@ description = "fork Claude Code session into new pane"
 key = "prefix+t"
 type = "shell"
 command = "~/.config/herdr/scripts/branch-session.sh tab"
-description = "branch this Claude session into a new tab"
+description = "branch this agent session into a new tab"
 
 [[keys.command]]
 key = "prefix+f"
 type = "shell"
 command = "~/.config/herdr/scripts/branch-session.sh pane"
-description = "branch this Claude session into a new split pane (fork)"
+description = "branch this agent session into a new split pane (fork)"
