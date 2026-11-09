@@ -24,7 +24,8 @@ dotfiles/
 ├── lazygit/       → ~/.config/lazygit/
 ├── nvim-vscode/   → ~/.config/nvim-vscode/
 ├── herdr/         → ~/.config/herdr/config.toml, ~/.config/herdr/scripts/
-├── herdr-app/     → ~/.config/herdr-app/keys.json, settings.json (Herdr desktop)
+├── herdr-app/     → ~/.config/herdr-app/keys.json, settings.json (Herdr desktop, macOS)
+├── herdr-app-linux/ → same files, Linux version (stock Linux defaults: ctrl-shift/alt keys)
 └── yazi/          → ~/.config/yazi/
 ```
 
