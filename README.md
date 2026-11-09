@@ -24,6 +24,7 @@ dotfiles/
 ├── lazygit/       → ~/.config/lazygit/
 ├── nvim-vscode/   → ~/.config/nvim-vscode/
 ├── herdr/         → ~/.config/herdr/config.toml, ~/.config/herdr/scripts/
+├── herdr-app/     → ~/.config/herdr-app/keys.json, settings.json (Herdr desktop)
 └── yazi/          → ~/.config/yazi/
 ```
 
